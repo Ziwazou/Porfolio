@@ -124,6 +124,14 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                         featured: true
                     },
                     {
+                        title: 'AI Calculator Agent',
+                        description: 'Unbeatable AI Calculator Agent using the minimax algorithm. An intelligent calculator that plays optimally in calculator-based games.',
+                        technologies: ['JavaScript', 'HTML', 'CSS', 'Minimax Algorithm', 'Game AI'],
+                        github: 'https://github.com/Ziwazou/Ai_Calculator_Agent',
+                        demo: 'https://ai-calculator-agent.vercel.app/',
+                        featured: true
+                    },
+                    {
                         title: 'Facial Emotions Recognition',
                         description: 'Deep Learning model (ViT) to classify emotions from facial images. Computer vision project for emotion detection using Vision Transformer architecture.',
                         technologies: ['Python', 'PyTorch', 'ViT', 'Computer Vision', 'Deep Learning'],
