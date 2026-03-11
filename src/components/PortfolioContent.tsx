@@ -129,7 +129,15 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                         technologies: ['JavaScript', 'HTML', 'CSS', 'Minimax Algorithm', 'Game AI'],
                         github: 'https://github.com/Ziwazou/Ai_Calculator_Agent',
                         demo: 'https://ai-calculator-agent.vercel.app/',
-                        featured: true
+                        featured: false
+                    },
+                    {
+                        title: 'UCI Bank Marketing Analysis',
+                        description: 'Data analysis and modeling project on the UCI Bank Marketing dataset. Explores client subscription to term deposits through EDA, feature engineering, and predictive modeling. Includes a detailed report (rapport.pdf).',
+                        technologies: ['Python', 'Jupyter', 'Pandas', 'Scikit-learn', 'Data Analysis', 'Machine Learning'],
+                        github: 'https://github.com/Ziwazou/UCI_Bank_Marketing_Analysis',
+                        demo: 'https://github.com/Ziwazou/UCI_Bank_Marketing_Analysis',
+                        featured: false
                     },
                     {
                         title: 'Facial Emotions Recognition',
