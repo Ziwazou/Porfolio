@@ -21,16 +21,18 @@ interface PortfolioContentProps {
 }
 
 type Section = 'about' | 'skills' | 'projects' | 'experience' | 'contact';
+type Language = 'en' | 'fr';
 
 const PortfolioContent: React.FC<PortfolioContentProps> = () => {
     const [activeSection, setActiveSection] = useState<Section>('about');
+    const [language, setLanguage] = useState<Language>('fr');
 
     const sections = [
-        { id: 'about' as Section, label: 'About', icon: User },
-        { id: 'skills' as Section, label: 'Skills', icon: Code },
-        { id: 'projects' as Section, label: 'Projects', icon: Terminal },
-        { id: 'experience' as Section, label: 'Experience & Education', icon: GraduationCap },
-        { id: 'contact' as Section, label: 'Contact', icon: Mail },
+        { id: 'about' as Section, label: language === 'fr' ? 'A propos' : 'About', icon: User },
+        { id: 'skills' as Section, label: language === 'fr' ? 'Competences' : 'Skills', icon: Code },
+        { id: 'projects' as Section, label: language === 'fr' ? 'Projets' : 'Projects', icon: Terminal },
+        { id: 'experience' as Section, label: language === 'fr' ? 'Experience & Formation' : 'Experience & Education', icon: GraduationCap },
+        { id: 'contact' as Section, label: language === 'fr' ? 'Contact' : 'Contact', icon: Mail },
     ];
 
     const renderAbout = () => (
@@ -40,27 +42,65 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
             transition={{ duration: 0.5 }}
             className="flex flex-col h-full"
         >
-            <div className="text-terminal-green text-xl font-bold mb-4 flex-shrink-0">~/about</div>
-            <div className="text-center mb-6 flex-shrink-0" style={{ fontFamily: "'Kaushan Script', cursive", color: 'var(--terminal-green)' }}>
-                <span className="text-3xl md:text-4xl">Ziouani Yanis</span>
-            </div>
-            <div className="flex-1 flex flex-col justify-center space-y-3 text-terminal-foreground">
-                <p className="leading-relaxed">
-                    Hi! I'm an <span className="text-terminal-green font-semibold">AI Engineer</span> & <span className="text-terminal-green font-semibold">Data Scientist</span> passionate about building intelligent systems and extracting insights from data.
-                    I design and deploy machine learning models, work with large-scale datasets, and create solutions that bridge AI research and real-world applications.
-                </p>
-                <p className="leading-relaxed">
-                    I specialize in deep learning, NLP, computer vision, and data pipelines. From prototyping to production, I enjoy turning complex data into actionable intelligence.
-                    When I'm not training models, you can find me exploring the latest AI research or contributing to open-source ML projects.
-                </p>
-                <div className="flex items-center space-x-4 mt-6">
-                    <div className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-terminal-green" />
-                        <span>Location: Paris</span>
+            <div className="text-terminal-green text-xl font-bold mb-4 flex-shrink-0">{language === 'fr' ? '~/a-propos' : '~/about'}</div>
+            <div className="flex-1 flex flex-col justify-center gap-8 lg:flex-row lg:items-center">
+                <div className="mx-auto lg:mx-0 flex-shrink-0">
+                    <div className="relative w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden border-2 border-terminal-green/50 bg-terminal-green/10">
+                        <img
+                            src="/moi.jpeg"
+                            alt="Yanis Ziouani"
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                            }}
+                        />
+                        <div className="absolute inset-0 hidden flex items-center justify-center bg-terminal-green/10 text-terminal-green text-2xl font-bold" data-fallback>
+                            YZ
+                        </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                        <Calendar className="w-4 h-4 text-terminal-green" />
-                        <span>Available for opportunities</span>
+                </div>
+                <div className="flex-1">
+                    <div className="text-center lg:text-left mb-6 flex-shrink-0" style={{ fontFamily: "'Kaushan Script', cursive", color: 'var(--terminal-green)' }}>
+                        <span className="text-3xl md:text-4xl">Ziouani Yanis</span>
+                    </div>
+                    <div className="space-y-3 text-terminal-foreground">
+                        <p className="leading-relaxed">
+                            {language === 'fr' ? (
+                                <>
+                                    Bonjour ! Je suis <span className="text-terminal-green font-semibold">Ingenieur IA</span> et <span className="text-terminal-green font-semibold">Data Scientist</span>, passionne par la creation de systemes intelligents et l'extraction d'insights a partir des donnees.
+                                    Je conçois et deploie des modeles de machine learning, je travaille sur des jeux de donnees a grande echelle et je cree des solutions qui relient la recherche en IA aux usages concrets.
+                                </>
+                            ) : (
+                                <>
+                                    Hi! I'm an <span className="text-terminal-green font-semibold">AI Engineer</span> & <span className="text-terminal-green font-semibold">Data Scientist</span> passionate about building intelligent systems and extracting insights from data.
+                                    I design and deploy machine learning models, work with large-scale datasets, and create solutions that bridge AI research and real-world applications.
+                                </>
+                            )}
+                        </p>
+                        <p className="leading-relaxed">
+                            {language === 'fr' ? (
+                                <>
+                                    Je me specialise en deep learning, NLP, computer vision et pipelines de donnees. Du prototype a la production, j'aime transformer des donnees complexes en intelligence exploitable.
+                                    Quand je n'entraine pas des modeles, j'explore les dernieres avancees en IA ou je contribue a des projets open source en machine learning.
+                                </>
+                            ) : (
+                                <>
+                                    I specialize in deep learning, NLP, computer vision, and data pipelines. From prototyping to production, I enjoy turning complex data into actionable intelligence.
+                                    When I'm not training models, you can find me exploring the latest AI research or contributing to open-source ML projects.
+                                </>
+                            )}
+                        </p>
+                        <div className="flex flex-col gap-3 pt-3 sm:flex-row sm:items-center sm:gap-4">
+                            <div className="flex items-center space-x-2">
+                                <MapPin className="w-4 h-4 text-terminal-green" />
+                                <span>{language === 'fr' ? 'Localisation : Paris' : 'Location: Paris'}</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <Calendar className="w-4 h-4 text-terminal-green" />
+                                <span>{language === 'fr' ? 'Disponible pour des opportunites' : 'Available for opportunities'}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,15 +114,16 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
             transition={{ duration: 0.5 }}
             className="space-y-4"
         >
-            <div className="text-terminal-green text-xl font-bold mb-4">~/skills</div>
+            <div className="text-terminal-green text-xl font-bold mb-4">{language === 'fr' ? '~/competences' : '~/skills'}</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                    { category: 'Programming & Development', skills: ['Python', 'NumPy', 'Pandas', 'Scikit-learn', 'PyTorch', 'LangChain', 'SQL', 'Git', 'GitHub', 'Linux'] },
-                    { category: 'Machine Learning & Deep Learning', skills: ['NLP', 'Computer Vision'] },
-                    { category: 'MLOps & Deployment', skills: ['Docker', 'FastAPI', 'MLflow', 'CI/CD'] },
-                    { category: 'Big Data & Data Engineering', skills: ['Hadoop', 'Talend'] },
-                    { category: 'Databases', skills: ['Relational', 'NoSQL'] },
-                    { category: 'Generative AI', skills: ['LLMs', 'Fine-tuning', 'RAG', 'AI Agents'] },
+                    { category: language === 'fr' ? 'Programmation & Developpement' : 'Programming & Development', skills: ['Python', 'SQL', 'Git', 'GitHub', 'Linux'] },
+                    { category: 'Data Science', skills: ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'SciPy'] },
+                    { category: language === 'fr' ? 'Machine Learning & Deep Learning' : 'Machine Learning & Deep Learning', skills: ['Scikit-learn', 'PyTorch', 'NLP', 'Computer Vision'] },
+                    { category: language === 'fr' ? 'MLOps & Deploiement' : 'MLOps & Deployment', skills: ['Docker', 'FastAPI', 'MLflow', 'CI/CD'] },
+                    { category: language === 'fr' ? 'Big Data & Data Engineering' : 'Big Data & Data Engineering', skills: ['Hadoop', 'Talend'] },
+                    { category: language === 'fr' ? 'Bases de donnees' : 'Databases', skills: ['PostgreSQL', 'MongoDB'] },
+                    { category: language === 'fr' ? 'IA Generative' : 'Generative AI', skills: ['LLMs', 'RAG', 'Fine-tuning', 'LangChain', 'LangGraph', 'AI Agents', 'Vector Databases'] },
                 ].map((skillGroup, index) => (
                     <motion.div
                         key={skillGroup.category}
@@ -112,12 +153,14 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
             transition={{ duration: 0.5 }}
             className="space-y-4"
         >
-            <div className="text-terminal-green text-xl font-bold mb-4">~/projects</div>
+            <div className="text-terminal-green text-xl font-bold mb-4">{language === 'fr' ? '~/projets' : '~/projects'}</div>
             <div className="space-y-6">
                 {[
                     {
                         title: 'ESTIN Internal Regulation RAG System',
-                        description: 'RAG (Retrieval-Augmented Generation) system to query the internal regulations of ESTIN. Features a web chat interface, vector search with Pinecone, LangGraph agent, conversation memory, cited sources, and Markdown rendering. Built with FastAPI, Groq LLM, and HuggingFace embeddings.',
+                        description: language === 'fr'
+                            ? 'Systeme RAG (Retrieval-Augmented Generation) pour interroger le reglement interieur de l\'ESTIN. Il comprend une interface de chat web, une recherche vectorielle avec Pinecone, un agent LangGraph, une memoire conversationnelle, les sources citees et le rendu Markdown. Construit avec FastAPI, Groq LLM et les embeddings HuggingFace.'
+                            : 'RAG (Retrieval-Augmented Generation) system to query the internal regulations of ESTIN. Features a web chat interface, vector search with Pinecone, LangGraph agent, conversation memory, cited sources, and Markdown rendering. Built with FastAPI, Groq LLM, and HuggingFace embeddings.',
                         technologies: ['Python', 'FastAPI', 'LangGraph', 'Pinecone', 'Groq', 'HuggingFace'],
                         github: 'https://github.com/Ziwazou/ESTIN_INTERNAL_REGULATION_RAG_SYSTEM',
                         demo: 'https://github.com/Ziwazou/ESTIN_INTERNAL_REGULATION_RAG_SYSTEM',
@@ -125,7 +168,9 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                     },
                     {
                         title: 'AI Calculator Agent',
-                        description: 'Unbeatable AI Calculator Agent using the minimax algorithm. An intelligent calculator that plays optimally in calculator-based games.',
+                        description: language === 'fr'
+                            ? 'Agent calculatrice IA imbattable utilisant l\'algorithme minimax. Une calculatrice intelligente qui joue de maniere optimale dans les jeux bases sur une calculatrice.'
+                            : 'Unbeatable AI Calculator Agent using the minimax algorithm. An intelligent calculator that plays optimally in calculator-based games.',
                         technologies: ['JavaScript', 'HTML', 'CSS', 'Minimax Algorithm', 'Game AI'],
                         github: 'https://github.com/Ziwazou/Ai_Calculator_Agent',
                         demo: 'https://ai-calculator-agent.vercel.app/',
@@ -133,7 +178,9 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                     },
                     {
                         title: 'UCI Bank Marketing Analysis',
-                        description: 'Data analysis and modeling project on the UCI Bank Marketing dataset. Explores client subscription to term deposits through EDA, feature engineering, and predictive modeling. Includes a detailed report (rapport.pdf).',
+                        description: language === 'fr'
+                            ? 'Projet d\'analyse et de modelisation sur le dataset UCI Bank Marketing. Il etudie la souscription des clients aux depots a terme via l\'EDA, le feature engineering et la modelisation predictive. Inclut un rapport detaille (rapport.pdf).'
+                            : 'Data analysis and modeling project on the UCI Bank Marketing dataset. Explores client subscription to term deposits through EDA, feature engineering, and predictive modeling. Includes a detailed report (rapport.pdf).',
                         technologies: ['Python', 'Jupyter', 'Pandas', 'Scikit-learn', 'Data Analysis', 'Machine Learning'],
                         github: 'https://github.com/Ziwazou/UCI_Bank_Marketing_Analysis',
                         demo: 'https://github.com/Ziwazou/UCI_Bank_Marketing_Analysis',
@@ -141,7 +188,9 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                     },
                     {
                         title: 'Facial Emotions Recognition',
-                        description: 'Deep Learning model (ViT) to classify emotions from facial images. Computer vision project for emotion detection using Vision Transformer architecture.',
+                        description: language === 'fr'
+                            ? 'Modele de Deep Learning (ViT) pour classifier les emotions a partir d\'images de visages. Projet de computer vision pour la detection d\'emotions avec une architecture Vision Transformer.'
+                            : 'Deep Learning model (ViT) to classify emotions from facial images. Computer vision project for emotion detection using Vision Transformer architecture.',
                         technologies: ['Python', 'PyTorch', 'ViT', 'Computer Vision', 'Deep Learning'],
                         github: 'https://github.com/tarekichalalen2002/facial-emotions-recognition',
                         demo: 'https://github.com/tarekichalalen2002/facial-emotions-recognition',
@@ -190,20 +239,20 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
             transition={{ duration: 0.5 }}
             className="space-y-6"
         >
-            <div className="text-terminal-green text-xl font-bold mb-4">~/experience & education</div>
+            <div className="text-terminal-green text-xl font-bold mb-4">{language === 'fr' ? '~/experience & formation' : '~/experience & education'}</div>
 
             {/* Education */}
             <div>
                 <h3 className="text-terminal-green font-semibold mb-3 flex items-center gap-2">
                     <GraduationCap className="w-4 h-4" />
-                    Educationx
+                    {language === 'fr' ? 'Formation' : 'Education'}
                 </h3>
                 <div className="space-y-4">
                     {[
-                        { degree: 'MSc Data Science & Business Intelligence', institution: 'Epitech Paris', period: 'Since Jan 2026' },
-                        { degree: 'Higher Cycle - AI & Data Science', institution: 'ESTIN Béjaia', period: '2022 - 2025', topics: ['Deep Learning', 'Reinforcement Learning', 'Advanced Databases', 'Data Analysis'] },
-                        { degree: 'Preparatory Cycle', institution: 'ESTIN Béjaia', period: '2020 - 2022', topics: ['Mathematics', 'OOP', 'Machine Architectures', 'Operating Systems'] },
-                        { degree: 'Baccalaureate - Experimental Sciences', institution: 'Mouloud Kacem High School, Oran', period: '2020', topics: ['Very Good'] },
+                        { degree: 'MSc Data Science & Business Intelligence', institution: 'Epitech Paris', period: language === 'fr' ? 'Depuis jan. 2026' : 'Since Jan 2026' },
+                        { degree: language === 'fr' ? 'Cycle superieur - IA & Data Science' : 'Higher Cycle - AI & Data Science', institution: 'ESTIN Béjaia', period: '2022 - 2025', topics: language === 'fr' ? ['Deep Learning', 'Reinforcement Learning', 'Bases de donnees avancees', 'Analyse de donnees'] : ['Deep Learning', 'Reinforcement Learning', 'Advanced Databases', 'Data Analysis'] },
+                        { degree: language === 'fr' ? 'Cycle preparatoire' : 'Preparatory Cycle', institution: 'ESTIN Béjaia', period: '2020 - 2022', topics: language === 'fr' ? ['Mathematiques', 'POO', 'Architectures des machines', 'Systemes d\'exploitation'] : ['Mathematics', 'OOP', 'Machine Architectures', 'Operating Systems'] },
+                        { degree: language === 'fr' ? 'Baccalaureat - Sciences experimentales' : 'Baccalaureate - Experimental Sciences', institution: 'Mouloud Kacem High School, Oran', period: '2020', topics: language === 'fr' ? ['Tres bien'] : ['Very Good'] },
                     ].map((edu, index) => (
                         <motion.div
                             key={index}
@@ -237,15 +286,17 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
             <div>
                 <h3 className="text-terminal-green font-semibold mb-3 flex items-center gap-2">
                     <Briefcase className="w-4 h-4" />
-                    Experience
+                    {language === 'fr' ? 'Experience' : 'Experience'}
                 </h3>
                 <div className="space-y-4">
                     {[
                         {
-                            position: 'Software Engineer',
+                            position: language === 'fr' ? 'Ingenieur Logiciel' : 'Software Engineer',
                             company: 'Sonatrach Hassi R\'mel, Algeria',
                             period: '2024',
-                            description: 'Design and development of a document management platform with AI integration for automatic summarization of large PDF files.',
+                            description: language === 'fr'
+                                ? 'Conception et developpement d\'une plateforme de gestion documentaire avec integration d\'IA pour le resume automatique de fichiers PDF volumineux.'
+                                : 'Design and development of a document management platform with AI integration for automatic summarization of large PDF files.',
                         },
                     ].map((job, index) => (
                         <motion.div
@@ -280,7 +331,9 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
             <div className="text-terminal-green text-xl font-bold mb-4">~/contact</div>
             <div className="space-y-4">
                 <p className="text-terminal-foreground">
-                    I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology!
+                    {language === 'fr'
+                        ? 'Je suis toujours ouvert a discuter de nouvelles opportunites, de projets interessants ou simplement a echanger autour de la technologie !'
+                        : 'I\'m always open to discussing new opportunities, interesting projects, or just having a chat about technology!'}
                 </p>
                 <div className="space-y-3">
                     <a href="mailto:yanisziouani4@gmail.com" className="flex items-center space-x-3 text-terminal-foreground hover:text-terminal-green transition-colors">
@@ -297,16 +350,13 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                     </a>
                 </div>
                 <div className="mt-6">
-                    <p className="text-terminal-green mb-2">Quick Actions:</p>
+                    <p className="text-terminal-green mb-2">{language === 'fr' ? 'Actions rapides :' : 'Quick Actions:'}</p>
                     <div className="flex flex-wrap gap-2">
                         <a href="mailto:yanisziouani4@gmail.com" className="px-3 py-1 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/30 hover:bg-terminal-green/20 transition-colors">
-                            Send Email
+                            {language === 'fr' ? 'Envoyer un email' : 'Send Email'}
                         </a>
                         <button className="px-3 py-1 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/30 hover:bg-terminal-green/20 transition-colors">
-                            View Resume
-                        </button>
-                        <button className="px-3 py-1 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/30 hover:bg-terminal-green/20 transition-colors">
-                            Schedule Call
+                            {language === 'fr' ? 'Voir le CV' : 'View Resume'}
                         </button>
                     </div>
                 </div>
@@ -337,32 +387,19 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
             </div>
 
             <div className="flex flex-1 overflow-hidden flex-col">
-                {/* Top: Profile image + Main content */}
-                <div className="flex flex-1 overflow-hidden">
-                    {/* Profile image */}
-                    <div className="w-48 md:w-56 flex-shrink-0 border-r border-terminal-green/30 p-4 flex flex-col items-center">
-                        <div className="self-end mb-4">
-                            <ThemeToggle />
-                        </div>
-                        <div className="flex-1 flex items-center justify-center">
-                            <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-terminal-green/50 bg-terminal-green/10">
-                                <img
-                                    src="/moi.jpeg"
-                                    alt="Yanis Ziouani"
-                                    className="w-full h-full object-cover"
-                                    onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                        e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                                    }}
-                                />
-                                <div className="absolute inset-0 hidden flex items-center justify-center bg-terminal-green/10 text-terminal-green text-2xl font-bold" data-fallback>
-                                    YZ
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div className="flex items-center justify-end gap-3 border-b border-terminal-green/30 px-6 py-3">
+                    <button
+                        onClick={() => setLanguage((prev) => (prev === 'en' ? 'fr' : 'en'))}
+                        className="theme-toggle min-w-[56px] text-sm font-medium text-terminal-green"
+                        title={language === 'fr' ? 'Passer en anglais' : 'Switch to French'}
+                    >
+                        {language === 'fr' ? 'FR' : 'EN'}
+                    </button>
+                    <ThemeToggle />
+                </div>
 
-                    {/* Main Content */}
+                {/* Main content */}
+                <div className="flex flex-1 overflow-hidden">
                     <div className="flex-1 p-6 overflow-y-auto flex flex-col">
                         <AnimatePresence mode="wait">
                             <motion.div
