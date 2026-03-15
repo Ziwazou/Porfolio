@@ -15,6 +15,7 @@ import {
     GraduationCap
 } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import cvFile from '../cv/cv.jpg';
 
 interface PortfolioContentProps {
     onBack: () => void;
@@ -352,12 +353,13 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                 <div className="mt-6">
                     <p className="text-terminal-green mb-2">{language === 'fr' ? 'Actions rapides :' : 'Quick Actions:'}</p>
                     <div className="flex flex-wrap gap-2">
-                        <a href="mailto:yanisziouani4@gmail.com" className="px-3 py-1 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/30 hover:bg-terminal-green/20 transition-colors">
-                            {language === 'fr' ? 'Envoyer un email' : 'Send Email'}
+                        <a
+                            href={cvFile}
+                            download="Yanis-Ziouani-CV.jpg"
+                            className="px-3 py-1 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/30 hover:bg-terminal-green/20 transition-colors"
+                        >
+                            {language === 'fr' ? 'Telecharger le CV' : 'Download Resume'}
                         </a>
-                        <button className="px-3 py-1 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/30 hover:bg-terminal-green/20 transition-colors">
-                            {language === 'fr' ? 'Voir le CV' : 'View Resume'}
-                        </button>
                     </div>
                 </div>
             </div>
