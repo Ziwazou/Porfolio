@@ -70,26 +70,26 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                         <p className="leading-relaxed">
                             {language === 'fr' ? (
                                 <>
-                                    Bonjour ! Je suis <span className="text-terminal-green font-semibold">Ingenieur IA</span> et <span className="text-terminal-green font-semibold">Data Scientist</span>, passionne par la creation de systemes intelligents et l'extraction d'insights a partir des donnees.
-                                    Je conçois et deploie des modeles de machine learning, je travaille sur des jeux de donnees a grande echelle et je cree des solutions qui relient la recherche en IA aux usages concrets.
+                                    Bonjour ! Je suis <span className="text-terminal-green font-semibold">etudiant en IA</span>, passionne par la creation de <span className="text-terminal-green font-semibold">systemes intelligents</span>, d'agents autonomes et de solutions d'automatisation.
+                                    Je concois et deploie des architectures avancees (RAG, systemes multi-agents) et je developpe des outils d'automatisation reliant les modeles d'IA de pointe aux besoins concrets.
                                 </>
                             ) : (
                                 <>
-                                    Hi! I'm an <span className="text-terminal-green font-semibold">AI Engineer</span> & <span className="text-terminal-green font-semibold">Data Scientist</span> passionate about building intelligent systems and extracting insights from data.
-                                    I design and deploy machine learning models, work with large-scale datasets, and create solutions that bridge AI research and real-world applications.
+                                    Hi! I'm an <span className="text-terminal-green font-semibold">AI Student</span> passionate about building <span className="text-terminal-green font-semibold">intelligent systems</span>, autonomous agents, and automation solutions.
+                                    I design and deploy advanced agent architectures (RAG, multi-agent systems) and build automation pipelines that bridge cutting-edge AI models with real-world workflows.
                                 </>
                             )}
                         </p>
                         <p className="leading-relaxed">
                             {language === 'fr' ? (
                                 <>
-                                    Je me specialise en deep learning, NLP, computer vision et pipelines de donnees. Du prototype a la production, j'aime transformer des donnees complexes en intelligence exploitable.
-                                    Quand je n'entraine pas des modeles, j'explore les dernieres avancees en IA ou je contribue a des projets open source en machine learning.
+                                    Je me specialise dans les agents IA, les systemes RAG, le NLP et l'automatisation de bout en bout. Du prototype a la production, j'aime concevoir des systemes intelligents capables de raisonner, d'interagir avec des outils et d'executer des flux de taches en toute autonomie.
+                                    Quand je ne construis pas d'agents, j'explore les dernieres avancees en IA generative ou je contribue a des projets open source.
                                 </>
                             ) : (
                                 <>
-                                    I specialize in deep learning, NLP, computer vision, and data pipelines. From prototyping to production, I enjoy turning complex data into actionable intelligence.
-                                    When I'm not training models, you can find me exploring the latest AI research or contributing to open-source ML projects.
+                                    I specialize in AI agents, RAG systems, NLP, and end-to-end workflow automation. From prototyping to production, I enjoy building intelligent systems capable of reasoning, using tools, and executing task flows autonomously.
+                                    When I'm not designing agents, you can find me exploring the latest generative AI research or contributing to open-source projects.
                                 </>
                             )}
                         </p>
@@ -158,6 +158,16 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
             <div className="text-terminal-green text-xl font-bold mb-4">{language === 'fr' ? '~/projets' : '~/projects'}</div>
             <div className="space-y-6">
                 {[
+                    {
+                        title: 'Medical Chatbot RAG System',
+                        description: language === 'fr'
+                            ? 'Systeme RAG medical pour interroger des ouvrages cliniques et documents de reference. Il comprend une interface de chat web en temps reel, une recherche vectorielle avec Pinecone, un agent conversationnel LangChain pilote par Google Gemini, des embeddings HuggingFace et la citation des sources.'
+                            : 'Medical RAG system to query reference clinical literature and medical books. Features a real-time web chat interface, vector search with Pinecone, LangChain conversational agent powered by Google Gemini, HuggingFace embeddings, and cited sources.',
+                        technologies: ['Python', 'Flask', 'LangChain', 'Google Gemini', 'Pinecone', 'HuggingFace', 'RAG'],
+                        github: 'https://github.com/Ziwazou/medical_chatbot_RAG_system',
+                        demo: 'https://github.com/Ziwazou/medical_chatbot_RAG_system',
+                        featured: true
+                    },
                     {
                         title: 'ESTIN Internal Regulation RAG System',
                         description: language === 'fr'
