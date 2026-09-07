@@ -15,7 +15,7 @@ import {
     GraduationCap
 } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
-import cvFile from '../cv/cv.jpg';
+import cvFile from '../cv/CV_stage.pdf';
 
 interface PortfolioContentProps {
     onBack: () => void;
@@ -292,12 +292,22 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                 <div className="space-y-4">
                     {[
                         {
-                            position: language === 'fr' ? 'Ingenieur Logiciel' : 'Software Engineer',
+                            position: language === 'fr' ? 'Stagiaire Ingénieur IA' : 'AI Engineer Intern',
+                            company: 'Taxis Select, Trappes, France',
+                            period: language === 'fr' ? 'Depuis mars 2026' : 'Since March 2026',
+                            description: language === 'fr'
+                                ? 'Participation au développement d’un système multi-agents autonomes dédié au traitement automatisé des tickets de bugs plateforme : analyse des réclamations et rapports d’erreurs, diagnostic de la cause racine et génération des corrections directement au sein de la base de code.'
+                                : 'Contributed to the development of an autonomous multi-agent system dedicated to automated bug ticket resolution: analyzing error reports, performing root cause diagnosis, and generating code fixes directly within the repository.',
+                            technologies: ['Multi-Agents', 'LLMs', 'Python', 'FastAPI', 'Automation', 'Git'],
+                        },
+                        {
+                            position: language === 'fr' ? 'Stagiaire en Génie Logiciel & IA' : 'Software Engineering & AI Intern',
                             company: 'Sonatrach Hassi R\'mel, Algeria',
                             period: '2024',
                             description: language === 'fr'
-                                ? 'Conception et developpement d\'une plateforme de gestion documentaire avec integration d\'IA pour le resume automatique de fichiers PDF volumineux.'
-                                : 'Design and development of a document management platform with AI integration for automatic summarization of large PDF files.',
+                                ? 'Conception et développement d\'une plateforme de gestion documentaire intelligente avec assistants basés sur RAG pour le résumé automatique, l\'extraction d\'informations et la structuration de données à partir de PDF.'
+                                : 'Design and development of an intelligent document management platform with RAG-based assistants for automatic summarization, information extraction, and data structuring from PDFs.',
+                            technologies: ['Python', 'RAG', 'LLMs', 'NLP', 'FastAPI'],
                         },
                     ].map((job, index) => (
                         <motion.div
@@ -315,6 +325,15 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                                 <span className="text-terminal-green/60 text-sm">{job.period}</span>
                             </div>
                             <p className="text-terminal-foreground text-sm">{job.description}</p>
+                            {job.technologies && (
+                                <div className="flex flex-wrap gap-2 mt-3">
+                                    {job.technologies.map((tech) => (
+                                        <span key={tech} className="px-2 py-0.5 bg-terminal-green/10 text-terminal-green rounded text-xs">
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
                         </motion.div>
                     ))}
                 </div>
@@ -355,7 +374,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                     <div className="flex flex-wrap gap-2">
                         <a
                             href={cvFile}
-                            download="Yanis-Ziouani-CV.jpg"
+                            download="Yanis-Ziouani-CV.pdf"
                             className="px-3 py-1 bg-terminal-green/10 text-terminal-green rounded border border-terminal-green/30 hover:bg-terminal-green/20 transition-colors"
                         >
                             {language === 'fr' ? 'Telecharger le CV' : 'Download Resume'}
