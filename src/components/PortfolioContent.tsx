@@ -12,7 +12,8 @@ import {
     Star,
     Calendar,
     MapPin,
-    GraduationCap
+    GraduationCap,
+    Award
 } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import cvFile from '../cv/CV_stage.pdf';
@@ -118,13 +119,13 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
             <div className="text-terminal-green text-xl font-bold mb-4">{language === 'fr' ? '~/competences' : '~/skills'}</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[
-                    { category: language === 'fr' ? 'Programmation & Developpement' : 'Programming & Development', skills: ['Python', 'SQL', 'Git', 'GitHub', 'Linux'] },
+                    { category: language === 'fr' ? 'Programmation & Developpement' : 'Programming & Development', skills: ['Python', 'SQL', 'Git', 'GitHub', 'Linux', language === 'fr' ? 'Gestion de projet' : 'Project Management'] },
                     { category: 'Data Science', skills: ['NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'SciPy'] },
                     { category: language === 'fr' ? 'Machine Learning & Deep Learning' : 'Machine Learning & Deep Learning', skills: ['Scikit-learn', 'PyTorch', 'NLP', 'Computer Vision'] },
                     { category: language === 'fr' ? 'MLOps & Deploiement' : 'MLOps & Deployment', skills: ['Docker', 'FastAPI', 'MLflow', 'CI/CD'] },
                     { category: language === 'fr' ? 'Big Data & Data Engineering' : 'Big Data & Data Engineering', skills: ['Hadoop', 'Talend'] },
                     { category: language === 'fr' ? 'Bases de donnees' : 'Databases', skills: ['PostgreSQL', 'MongoDB'] },
-                    { category: language === 'fr' ? 'IA Generative' : 'Generative AI', skills: ['LLMs', 'RAG', 'Fine-tuning', 'LangChain', 'LangGraph', 'AI Agents', 'Vector Databases'] },
+                    { category: language === 'fr' ? 'IA Generative & Agents' : 'Generative AI & Agents', skills: ['LLMs', 'RAG', 'Multi-agents', 'LangChain', 'LangGraph', language === 'fr' ? 'Serveurs MCP' : 'MCP Servers', 'n8n', 'Fine-tuning', 'Vector Databases'] },
                 ].map((skillGroup, index) => (
                     <motion.div
                         key={skillGroup.category}
@@ -334,6 +335,63 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                                     ))}
                                 </div>
                             )}
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Certifications */}
+            <div>
+                <h3 className="text-terminal-green font-semibold mb-3 flex items-center gap-2">
+                    <Award className="w-4 h-4" />
+                    {language === 'fr' ? 'Certifications' : 'Certifications'}
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {[
+                        {
+                            name: 'MCP for Production Automation',
+                            issuer: 'Hugging Face',
+                            period: '2026',
+                            highlight: true,
+                        },
+                        {
+                            name: 'Supervised Machine Learning',
+                            issuer: 'Coursera / DeepLearning.AI',
+                            period: '2024',
+                            highlight: false,
+                        },
+                        {
+                            name: 'Deep Learning Fundamentals',
+                            issuer: 'edX',
+                            period: '2024',
+                            highlight: false,
+                        },
+                        {
+                            name: 'Python 3 Programming',
+                            issuer: 'Codecademy',
+                            period: '2021',
+                            highlight: false,
+                        },
+                    ].map((cert, index) => (
+                        <motion.div
+                            key={cert.name}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            className={`p-3 border rounded-lg flex items-center justify-between ${
+                                cert.highlight
+                                    ? 'border-terminal-green bg-terminal-green/5'
+                                    : 'border-terminal-green/30'
+                            }`}
+                        >
+                            <div className="flex items-center gap-2.5">
+                                <Award className={`w-4 h-4 flex-shrink-0 ${cert.highlight ? 'text-terminal-green' : 'text-terminal-green/70'}`} />
+                                <div>
+                                    <h4 className="text-terminal-green font-semibold text-sm">{cert.name}</h4>
+                                    <p className="text-terminal-foreground/70 text-xs">{cert.issuer}</p>
+                                </div>
+                            </div>
+                            <span className="text-terminal-green/60 text-xs ml-2 flex-shrink-0">{cert.period}</span>
                         </motion.div>
                     ))}
                 </div>
