@@ -299,7 +299,7 @@ const PortfolioContent: React.FC<PortfolioContentProps> = () => {
                             description: language === 'fr'
                                 ? 'Participation au développement d’un système multi-agents autonomes dédié au traitement automatisé des tickets de bugs plateforme : analyse des réclamations et rapports d’erreurs, diagnostic de la cause racine et génération des corrections directement au sein de la base de code.'
                                 : 'Contributed to the development of an autonomous multi-agent system dedicated to automated bug ticket resolution: analyzing error reports, performing root cause diagnosis, and generating code fixes directly within the repository.',
-                            technologies: ['Multi-Agents', 'LLMs', 'Python', 'FastAPI', 'Automation', 'Git'],
+                            technologies: ['Multi-Agents', 'LangChain', 'LangGraph', 'LLMs', 'Python', 'FastAPI', 'Automation', 'Git'],
                         },
                         {
                             position: language === 'fr' ? 'Stagiaire en Génie Logiciel & IA' : 'Software Engineering & AI Intern',
